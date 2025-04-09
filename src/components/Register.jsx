@@ -5,17 +5,17 @@ import {
     validateUsername,
     validateEmail,
     validatePassword,
-    validateConfirmPassword,
+    validateConfirPassword,
     validateUsernameMessage,
     emailValidationMessage,
     validatePasswordMessage,
     passwordConfirmationMessage
-} from "../shared/validators";
+} from '../shared/validators'
 import { useRegister } from "../shared/hooks"
 
-export const Register = ({switchAuthHandler}) => {
+export const Register = ({ switchAuthHandler }) => {
 
-    const { register, isLoading} = useRegister()
+    const { register, isLoading } = useRegister()
 
     const [formState, setFormState] = useState({
         email: {
@@ -38,7 +38,7 @@ export const Register = ({switchAuthHandler}) => {
             isValid: false,
             showError: false
         }
-    })
+    });
 
     const handleInputValueChange = (value, field) => {
         setFormState((prevState) => ({
@@ -52,7 +52,7 @@ export const Register = ({switchAuthHandler}) => {
 
     const handleInputValidationOnBlur = (value, field) => {
         let isValid = false;
-        switch(field) {
+        switch (field) {
             case 'email':
                 isValid = validateEmail(value);
                 break;
@@ -63,13 +63,12 @@ export const Register = ({switchAuthHandler}) => {
                 isValid = validatePassword(value);
                 break;
             case 'passwordConfir':
-                isValid = validateConfirmPassword(formState.password.value, value);
+                isValid = validateConfirPassword(formState.password.value, value);
                 break;
             default:
                 break;
         }
-
-        setFormState((prevState) =>({
+        setFormState((prevState) => ({
             ...prevState,
             [field]: {
                 ...prevState[field],
@@ -80,20 +79,20 @@ export const Register = ({switchAuthHandler}) => {
     }
 
     const handleRegister = (event) => {
-        event.preventDefault();
+        event.preventDefault()
         register(formState.email.value, formState.password.value, formState.username.value)
     }
 
-    const isSubmitButtonDisabled = isLoading || 
-        !formState.email.isValid || 
-        !formState.username.isValid || 
-        !formState.password.isValid || 
-        !formState.passwordConfir.isValid
+    const isSubmitButtonDisabled = isLoading ||
+        !formState.email.isValid ||
+        !formState.password.isValid ||
+        !formState.passwordConfir.isValid ||
+        !formState.username.isValid;
 
     return (
         <div className="register-container">
             <Logo text={'Register Kinal Cast'} />
-            <form className="auth-form" >
+            <form className="auth-form">
                 <Input
                     field='email'
                     label='Email'
@@ -126,7 +125,7 @@ export const Register = ({switchAuthHandler}) => {
                 />
                 <Input
                     field='passwordConfir'
-                    label='Confirmar Passowrd'
+                    label='Password Confirmation'
                     value={formState.passwordConfir.value}
                     onChangeHandler={handleInputValueChange}
                     type='password'
@@ -134,14 +133,13 @@ export const Register = ({switchAuthHandler}) => {
                     showErrorMessage={formState.passwordConfir.showError}
                     validationMessage={passwordConfirmationMessage}
                 />
-                <button onClick={handleRegister} disabled={isSubmitButtonDisabled} >
+                <button onClick={handleRegister} disabled={isSubmitButtonDisabled}>
                     Register
                 </button>
-                <span onClick={switchAuthHandler} className="auth-form-switch-label" >
-                    Already have an account? Sign in
-                </span>
             </form>
+            <span onClick={switchAuthHandler} className="auth-form-switch-label">
+                Already have an account? Sign in
+            </span>
         </div>
     )
-
 }
