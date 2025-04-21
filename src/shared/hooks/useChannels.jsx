@@ -1,13 +1,13 @@
-import { useState } from "react"
-import toast from "react-hot-toast"
-import { getChannels as getChannelsRequest, getFollowedChannels } from "../../services"
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { getChannels as getChannelsRequest, getFollowedChannels } from "../../services/api";
 
 export const useChannels = () => {
-    
+
     const [ channels, setChannels ] = useState(null)
 
-    const getChannels = async(isLogged = false) => {
-        
+    const getChannels = async (isLogged = false) => {
+
         const channelsData = await getChannelsRequest()
 
         if(channelsData.error){
@@ -35,13 +35,12 @@ export const useChannels = () => {
             followedChannels: channelsData.data.channels.filter(channel => 
                 followedChannelsData.data.followedChannels.includes(channel.id)
             )
-        })
-
+        });
     }
 
     return {
         getChannels,
-        isFetching: Boolean(channels),
+        isFetching: !Boolean(channels),
         allChannels: channels?.channels,
         followedChannels: channels?.followedChannels
     }

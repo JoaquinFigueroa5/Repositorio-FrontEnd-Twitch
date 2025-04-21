@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { ChannelCard } from "./ChannelCard";
 
 export const Channels = ({channels}) => {
-
-    const navigate = useNavigate();
+    
+    const navigate = useNavigate()
 
     const handleNavigateToChannel = (id) => {
-        navigate(`/channels/${id}`)
+        navigate(`/channel/${id}`)
     }
 
     return(
@@ -24,5 +24,4 @@ export const Channels = ({channels}) => {
             ))}
         </div>
     )
-
 }

@@ -2,8 +2,8 @@ const imageUrl = ''
 
 const ChannelAvatar = ({url}) => {
     return(
-        <div className="channel-avatar-container">
-            <img src={url || imageUrl} width="100%" height="100%" alt="Default Avatar" />
+        <div className="channels-avatar-container">
+            <img src={url || imageUrl} width='100%' height='100%' alt="Default avatar"/>
         </div>
     )
 }
@@ -21,11 +21,13 @@ export const ChannelCard = ({
     }
 
     return(
-        <div className="channels-card" onClick={handleNavigate} >
-            <ChannelAvatar url={avatarUrl} />
+        <div className="channels-card" onClick={handleNavigate}>
+            <ChannelAvatar url={avatarUrl}/>
             <span className="channels-card-title">{title}</span>
             <span className="channels-card-title">{username}</span>
-            <span className="channels-card-title" style={{color: isOnline ? 'green' : 'red'}} >{isOnline ? 'ONLINE' : 'OFFLINE'}</span>
+            <span className="channels-card-title" style={{color: isOnline ? 'green' : 'red'}}>
+                {isOnline ? 'Online' : 'Offline'}
+            </span>
         </div>
     )
 }

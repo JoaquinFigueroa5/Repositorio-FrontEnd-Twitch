@@ -1,5 +1,6 @@
-export const Sidebar = ({channels}) => {
 
+export const Sidebar = ({channels}) => {
+    
     if(!channels){
         return null
     }
@@ -10,7 +11,7 @@ export const Sidebar = ({channels}) => {
             <span className="sidebar-subtitle">CANALES QUE SIGO</span>
             {channels.map((channel) => {
                 return(
-                    <div key={channel.id} className="sidebar-list-i">
+                    <div key={channel.id} className="sidebar-list-item">
                         <span className="sidebar-list-username">{channel.username}</span>
                         <span className="sidebar-list-status"
                             style={{
@@ -23,7 +24,5 @@ export const Sidebar = ({channels}) => {
                 )
             })}
         </div>
-            
     )
-
 }
